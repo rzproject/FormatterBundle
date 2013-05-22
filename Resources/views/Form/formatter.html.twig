@@ -1,0 +1,74 @@
+{% block sonata_formatter_type_selector_widget %}
+    {{ block('choice_widget') }}
+    <script>
+        var {{ source_id }}_rich_instance = false;
+
+        jQuery(document).ready(function() {
+
+            // This code requires CKEDITOR
+            if (typeof CKEDITOR === 'undefined') {
+                console.log('RzFormatterBundle requires CKEditor Installed.');
+                return;
+            }
+
+            jQuery('#{{ id }}').change(function() {
+                var elms = jQuery('#{{ source_id }}');
+
+                if ({{ source_id }}_rich_instance) {
+                    {{ source_id }}_rich_instance.destroy();
+                }
+
+                var val = jQuery(this).val();
+                switch(val) {
+                    case 'markdown':
+                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ source_id }}', {
+                            autoGrow_onStartup: true,
+                            autoGrow_maxHeight: 700,
+                            autoGrow_minHeight: 300,
+                            autoGrow_bottomSpace: 200,
+                            resize_enabled: true,
+                            startupMode : 'source',
+                            toolbar: [['Maximize']]
+                        });
+                        break;
+                    case 'twig':
+                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ source_id }}', {
+                            autoGrow_onStartup: true,
+                            autoGrow_maxHeight: 700,
+                            autoGrow_minHeight: 300,
+                            autoGrow_bottomSpace: 200,
+                            startupMode : 'source',
+                            toolbar: [['Maximize']]
+                        });
+                        break;
+                    case 'rawhtml':
+                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ source_id }}', {
+                            autoGrow_onStartup: true,
+                            autoGrow_maxHeight: 700,
+                            autoGrow_minHeight: 300,
+                            autoGrow_bottomSpace: 200,
+                            startupMode : 'source',
+                            toolbar: [['Maximize']]
+                        });
+                        break;
+                    case 'richhtml':
+                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ source_id }}', {
+                            autoGrow_onStartup: true,
+                            autoGrow_maxHeight: 700,
+                            autoGrow_minHeight: 300,
+                            autoGrow_bottomSpace: 200,
+                            toolbar: [
+                                [ "Source", "Maximize", "ShowBlocks" ],
+                                [ "Format", "Font","FontSize" ],
+                                [ "Bold","Italic","Underline", "-", "NumberedList","BulletedList" ],
+                                [ "Image","Flash","Table","PageBreak" ],
+                                [ "Cut","Copy","Paste","PasteText","-","Undo","Redo" ]
+                            ]
+                        });
+                }
+            });
+
+            jQuery('#{{ id }}').trigger('change');
+        });
+    </script>
+{% endblock sonata_formatter_type_selector_widget %}
