@@ -1,18 +1,11 @@
 <?php
 
-
 namespace Rz\FormatterBundle\Form\Type;
 
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\Options;
-
-use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 
 use Sonata\FormatterBundle\Formatter\Pool;
 
