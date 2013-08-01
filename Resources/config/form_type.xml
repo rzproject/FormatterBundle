@@ -11,7 +11,7 @@
 
     <services>
         <service id="rz_formatter.formatter_type_selector" class="%rz_formatter.formatter_type_selector.class%">
-            <tag name="form.type_extension" alias="sonata_formatter_type_selector" />
+            <tag name="form.type_extension" alias="sonata_formatter_type" />
             <argument type="service" id="sonata.formatter.pool" />
             <argument type="service" id="translator" />
         </service>
