@@ -56,33 +56,27 @@ class FormatterType extends AbstractTypeExtension
         );
 
         $resolver->setDefaults(array(
-           'inherit_data'      => true,
-           'event_dispatcher'  => null,
-           'format_field'      => null,
-           'format_field_options' => array(
-               'choices'           => function (Options $options) use ($pool, $translator) {
-                   $formatters = array();
-                   foreach ($pool->getFormatters() as $code => $instance) {
-                       $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
-                   }
+                   'inherit_data'      => true,
+                   'event_dispatcher'  => null,
+                   'format_field'      => null,
+                   'format_field_options' => array(
+                       'choices'           => function (Options $options) use ($pool, $translator) {
+                           $formatters = array();
+                           foreach ($pool->getFormatters() as $code => $instance) {
+                               $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
+                           }
 
-                   return $formatters;
-               }
-           ),
-           'source_field' => null,
-           'source_field_options'      => array(
-               'attr' => array('class' => 'span10', 'rows' => 20)
-           ),
-           'target_field' => null,
-           'listener'     => true,
-           'selectpicker_enabled' => true,
+                           return $formatters;
+                       }
+                   ),
+                   'source_field' => null,
+                   'source_field_options'      => array(
+                       'attr' => array('class' => 'span10', 'rows' => 20)
+                   ),
+                   'target_field' => null,
+                   'listener'     => true,
+            'selectpicker_enabled' => true,
         ));
-
-        $resolver->setRequired(array(
-                                   'format_field',
-                                   'source_field',
-                                   'target_field'
-                               ));
     }
 
     /**
@@ -90,6 +84,6 @@ class FormatterType extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'sonata_formatter_type';
+        return 'sonata_formatter_type_selector';
     }
 }

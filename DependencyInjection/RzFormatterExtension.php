@@ -33,5 +33,12 @@ class RzFormatterExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('form_type.xml');
+
+        // merge RzFieldTypeBundle to RzAdminBundle
+        $container->setParameter('twig.form.resources',
+                                 array_merge(
+                                     $container->getParameter('twig.form.resources'),
+                                     array('RzFormatterBundle:Form:formatter.html.twig')
+                                 ));
     }
 }
