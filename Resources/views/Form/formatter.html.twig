@@ -2,13 +2,13 @@
     <div class="row-fluid">
         {{ form_widget(form.children[format_field]) }}
     </div>
-    <div class="row-fluid sepH_c">
+    <div class="row-fluid">
         <div class="span12">
             <i>{{ "please_select_format_method"|trans({}, "SonataFormatterBundle") }}</i>
         </div>
     </div>
 
-    <div class="row-fluid">
+    <div class="row-fluid rz-formatter-source">
         <div class="span12">
             {{ form_widget(form.children[source_field]) }}
         </div>
