@@ -14,8 +14,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "rmzamora/formatter-bundle": "2.3.*@dev",
-        "rz/block-bundle": "2.3.1.*@dev"
+        "rmzamora/formatter-bundle": "~2.3.*@dev",
+        "rz/block-bundle": "~1.0"
     },
     "autoload": {
         "psr-0": { "Rz\\FormatterBundle": "" }
@@ -23,7 +23,7 @@
     "target-dir": "Rz/FormatterBundle",
     "extra": {
         "branch-alias": {
-            "dev-2.2": "2.3.1.x-dev"
+            "dev-master": "1.0.x-dev"
         }
     }
 }
