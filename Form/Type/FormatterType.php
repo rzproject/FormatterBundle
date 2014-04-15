@@ -56,6 +56,7 @@ class FormatterType extends AbstractTypeExtension
         );
 
         $resolver->setDefaults(array(
+                   'ckeditor_basepath'         => 'bundles/rzckeditor',
                    'inherit_data'      => true,
                    'event_dispatcher'  => null,
                    'format_field'      => null,
