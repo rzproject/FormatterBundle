@@ -18,20 +18,73 @@ use Symfony\Component\OptionsResolver\Options;
 
 use Sonata\FormatterBundle\Formatter\Pool;
 
+
+
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+
+use Symfony\Component\Form\AbstractType;
+
+use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
+
+use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
+
 class FormatterType extends AbstractTypeExtension
 {
     protected $pool;
-
+    protected $ckeditorConfigManager;
     protected $translator;
 
     /**
      * @param \Sonata\FormatterBundle\Formatter\Pool             $pool
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
      */
-    public function __construct(Pool $pool, TranslatorInterface $translator)
+    public function __construct(Pool $pool, TranslatorInterface $translator, $ckeditorConfigManager)
     {
         $this->pool = $pool;
         $this->translator = $translator;
+        $this->ckeditorConfigManager = $ckeditorConfigManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+
+        if (is_array($options['source_field'])) {
+            list($sourceField, ) = $options['source_field'];
+            $view->vars['source_field'] = $sourceField;
+        } else {
+            $view->vars['source_field'] = $options['source_field'];
+        }
+
+        if (is_array($options['format_field'])) {
+            list($formatField, ) = $options['format_field'];
+            $view->vars['format_field'] = $formatField;
+        } else {
+            $view->vars['format_field'] = $options['format_field'];
+        }
+        $view->vars['format_field_options'] = $options['format_field_options'];
+
+        $ckeditorConfiguration = array(
+            'toolbar'       => array_values($options['ckeditor_toolbar_icons']),
+        );
+
+        if ($options['ckeditor_context']) {
+            $contextConfig = $this->configManager->getConfig($options['ckeditor_context']);
+            $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
+        }
+
+
+
+        $ckeditorConfiguration = array_merge($ckeditorConfiguration, $options['ckeditor_config']);
+
+        $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
+        $view->vars['ckeditor_basepath'] = $options['ckeditor_basepath'];
+
+        $view->vars['source_id'] = str_replace($view->vars['name'], $view->vars['source_field'], $view->vars['id']);
     }
 
     /**
@@ -52,11 +105,11 @@ class FormatterType extends AbstractTypeExtension
                                    'selectpicker_data_width',
                                    'selectpicker_data_size',
                                    'selectpicker_disabled',
-                                   'selectpicker_dropup')
+                                   'selectpicker_dropup',
+                                   'ckeditor_config')
         );
 
         $resolver->setDefaults(array(
-                   'ckeditor_basepath'         => 'bundles/rzckeditor',
                    'inherit_data'      => true,
                    'event_dispatcher'  => null,
                    'format_field'      => null,
@@ -76,7 +129,10 @@ class FormatterType extends AbstractTypeExtension
                    ),
                    'target_field' => null,
                    'listener'     => true,
-            'selectpicker_enabled' => true,
+                   'selectpicker_enabled' => false,
+                   'ckeditor_config'=> $this->ckeditorConfigManager->getConfig('default')
+
+
         ));
     }
 
@@ -85,6 +141,6 @@ class FormatterType extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'sonata_formatter_type_selector';
+        return 'sonata_formatter_type';
     }
 }

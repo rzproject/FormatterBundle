@@ -65,20 +65,7 @@
                         });
                         break;
                     case 'richhtml':
-                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ form.children[source_field].vars.id }}', {
-                            autoGrow_onStartup: true,
-                            autoGrow_maxHeight: 700,
-                            autoGrow_minHeight: 300,
-                            autoGrow_bottomSpace: 200,
-                            allowedContent: true,
-                            toolbar: [
-                                [ "Source", "Maximize", "ShowBlocks" ],
-                                [ "Format", "Font","FontSize" ],
-                                [ "Bold","Italic","Underline", "-", "NumberedList","BulletedList" ],
-                                [ "Image","Flash","Table","PageBreak" ],
-                                [ "Cut","Copy","Paste","PasteText","-","Undo","Redo" ]
-                            ]
-                        });
+                        {{ source_id }}_rich_instance = {{ ckeditor_replace(form.children[source_field].vars.id, ckeditor_configuration) }};
                 }
             });
 

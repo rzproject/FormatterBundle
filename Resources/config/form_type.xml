@@ -14,6 +14,7 @@
             <tag name="form.type_extension" alias="sonata_formatter_type" />
             <argument type="service" id="sonata.formatter.pool" />
             <argument type="service" id="translator" />
+            <argument type="service" id="ivory_ck_editor.config_manager" />
         </service>
     </services>
 </container>
