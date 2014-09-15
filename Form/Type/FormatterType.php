@@ -50,46 +50,6 @@ class FormatterType extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-
-        if (is_array($options['source_field'])) {
-            list($sourceField, ) = $options['source_field'];
-            $view->vars['source_field'] = $sourceField;
-        } else {
-            $view->vars['source_field'] = $options['source_field'];
-        }
-
-        if (is_array($options['format_field'])) {
-            list($formatField, ) = $options['format_field'];
-            $view->vars['format_field'] = $formatField;
-        } else {
-            $view->vars['format_field'] = $options['format_field'];
-        }
-        $view->vars['format_field_options'] = $options['format_field_options'];
-
-        $ckeditorConfiguration = array(
-            'toolbar'       => array_values($options['ckeditor_toolbar_icons']),
-        );
-
-        if ($options['ckeditor_context']) {
-            $contextConfig = $this->configManager->getConfig($options['ckeditor_context']);
-            $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
-        }
-
-
-
-        $ckeditorConfiguration = array_merge($ckeditorConfiguration, $options['ckeditor_config']);
-
-        $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
-        $view->vars['ckeditor_basepath'] = $options['ckeditor_basepath'];
-
-        $view->vars['source_id'] = str_replace($view->vars['name'], $view->vars['source_field'], $view->vars['id']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
 
@@ -130,9 +90,6 @@ class FormatterType extends AbstractTypeExtension
                    'target_field' => null,
                    'listener'     => true,
                    'selectpicker_enabled' => false,
-                   'ckeditor_config'=> $this->ckeditorConfigManager->getConfig('default')
-
-
         ));
     }
 
