@@ -65,8 +65,7 @@ class FormatterType extends AbstractTypeExtension
                                    'selectpicker_data_width',
                                    'selectpicker_data_size',
                                    'selectpicker_disabled',
-                                   'selectpicker_dropup',
-                                   'ckeditor_config')
+                                   'selectpicker_dropup')
         );
 
         $resolver->setDefaults(array(
