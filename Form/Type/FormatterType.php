@@ -18,20 +18,33 @@ use Symfony\Component\OptionsResolver\Options;
 
 use Sonata\FormatterBundle\Formatter\Pool;
 
+
+
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+
+use Symfony\Component\Form\AbstractType;
+
+use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
+
+use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
+
 class FormatterType extends AbstractTypeExtension
 {
     protected $pool;
-
+    protected $ckeditorConfigManager;
     protected $translator;
 
     /**
      * @param \Sonata\FormatterBundle\Formatter\Pool             $pool
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
      */
-    public function __construct(Pool $pool, TranslatorInterface $translator)
+    public function __construct(Pool $pool, TranslatorInterface $translator, $ckeditorConfigManager)
     {
         $this->pool = $pool;
         $this->translator = $translator;
+        $this->ckeditorConfigManager = $ckeditorConfigManager;
     }
 
     /**
@@ -56,7 +69,6 @@ class FormatterType extends AbstractTypeExtension
         );
 
         $resolver->setDefaults(array(
-                   'ckeditor_basepath'         => 'bundles/rzckeditor',
                    'inherit_data'      => true,
                    'event_dispatcher'  => null,
                    'format_field'      => null,
@@ -76,7 +88,7 @@ class FormatterType extends AbstractTypeExtension
                    ),
                    'target_field' => null,
                    'listener'     => true,
-            'selectpicker_enabled' => true,
+                   'selectpicker_enabled' => false,
         ));
     }
 
@@ -85,6 +97,6 @@ class FormatterType extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'sonata_formatter_type_selector';
+        return 'sonata_formatter_type';
     }
 }
