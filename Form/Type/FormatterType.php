@@ -73,15 +73,7 @@ class FormatterType extends AbstractTypeExtension
                    'event_dispatcher'  => null,
                    'format_field'      => null,
                    'format_field_options' => array(
-                       'choices'           => function (Options $options) use ($pool, $translator) {
-                           $formatters = array();
-                           foreach ($pool->getFormatters() as $code => $instance) {
-                               $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
-                           }
-
-                           return $formatters;
-                       }
-                   ),
+                       'choices'           => $this->getChoices($pool, $translator)),
                    'source_field' => null,
                    'source_field_options'      => array(
                        'attr' => array('class' => 'span10', 'rows' => 20)
@@ -90,6 +82,15 @@ class FormatterType extends AbstractTypeExtension
                    'listener'     => true,
                    'selectpicker_enabled' => false,
         ));
+    }
+
+    protected function getChoices($pool, $translator) {
+        $formatters = array();
+        foreach ($pool->getFormatters() as $code => $instance) {
+            $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
+        }
+
+        return $formatters;
     }
 
     /**
