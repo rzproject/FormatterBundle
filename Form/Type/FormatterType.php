@@ -80,6 +80,17 @@ class FormatterType extends AbstractTypeExtension
                    ),
                    'target_field' => null,
                    'listener'     => true,
+                    'ckeditor_toolbar_icons'    => array( array(
+                        'Bold', 'Italic', 'Underline',
+                        '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
+                        '-', 'Undo', 'Redo',
+                        '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
+                        '-', 'Blockquote',
+                        '-', 'Image', 'Link', 'Unlink', 'Table'),
+                        array('Maximize', 'Source')
+                    ),
+                    'ckeditor_basepath'         => 'bundles/sonataformatter/vendor/ckeditor',
+                    'ckeditor_context'          => null,
                    'selectpicker_enabled' => false,
         ));
     }
