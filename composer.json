@@ -15,7 +15,7 @@
     "minimum-stability": "dev",
     "require": {
         "rmzamora/formatter-bundle": "~2.3",
-        "rz/block-bundle": "~1.0"
+        "rz/block-bundle": "~1.1"
     },
     "autoload": {
         "psr-4": { "Rz\\FormatterBundle\\": "" }
