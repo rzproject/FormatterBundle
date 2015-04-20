@@ -14,7 +14,7 @@
         </div>
     </div>
     <script>
-        var {{ source_id }}_rich_instance = false;
+        var {{ form.children[source_field].vars.id }}_rich_instance = false;
 
         jQuery(document).ready(function() {
 
@@ -27,14 +27,14 @@
             jQuery('#{{ form.children[format_field].vars.id }}').change(function() {
                 var elms = jQuery('#{{ form.children[source_field].vars.id }}');
 
-                if ({{ source_id }}_rich_instance) {
-                    {{ source_id }}_rich_instance.destroy();
+                if ({{ form.children[source_field].vars.id }}_rich_instance) {
+                    {{ form.children[source_field].vars.id }}_rich_instance.destroy();
                 }
 
                 var val = jQuery(this).val();
                 switch(val) {
                     case 'markdown':
-                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ form.children[source_field].vars.id }}', {
+                        {{ form.children[source_field].vars.id }}_rich_instance = CKEDITOR.replace('{{ form.children[source_field].vars.id }}', {
                             autoGrow_onStartup: true,
                             autoGrow_maxHeight: 700,
                             autoGrow_minHeight: 300,
@@ -45,7 +45,7 @@
                         });
                         break;
                     case 'text':
-                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ form.children[source_field].vars.id }}', {
+                        {{ form.children[source_field].vars.id }}_rich_instance = CKEDITOR.replace('{{ form.children[source_field].vars.id }}', {
                             autoGrow_onStartup: true,
                             autoGrow_maxHeight: 700,
                             autoGrow_minHeight: 300,
@@ -56,7 +56,7 @@
                         });
                         break;
                     case 'twig':
-                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ form.children[source_field].vars.id }}', {
+                        {{ form.children[source_field].vars.id }}_rich_instance = CKEDITOR.replace('{{ form.children[source_field].vars.id }}', {
                             autoGrow_onStartup: true,
                             autoGrow_maxHeight: 700,
                             autoGrow_minHeight: 300,
@@ -66,7 +66,7 @@
                         });
                         break;
                     case 'rawhtml':
-                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ form.children[source_field].vars.id }}', {
+                        {{ form.children[source_field].vars.id }}_rich_instance = CKEDITOR.replace('{{ form.children[source_field].vars.id }}', {
                             autoGrow_onStartup: true,
                             autoGrow_maxHeight: 700,
                             autoGrow_minHeight: 300,
@@ -76,7 +76,7 @@
                         });
                         break;
                     case 'richhtml':
-                        {{ source_id }}_rich_instance = {{ ckeditor_replace(form.children[source_field].vars.id, ckeditor_configuration) }};
+                        {{ form.children[source_field].vars.id }}_rich_instance = {{ ckeditor_replace(form.children[source_field].vars.id, ckeditor_configuration) }};
                 }
             });
 
