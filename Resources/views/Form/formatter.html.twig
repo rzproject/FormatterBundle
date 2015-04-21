@@ -76,7 +76,7 @@
                         });
                         break;
                     case 'richhtml':
-                        {{ form.children[source_field].vars.id }}_rich_instance = {{ ckeditor_replace(form.children[source_field].vars.id, ckeditor_configuration) }};
+                        {{ form.children[source_field].vars.id }}_rich_instance = {{ ckeditor_widget(form.children[source_field].vars.id, ckeditor_configuration) }};
                 }
             });
 
