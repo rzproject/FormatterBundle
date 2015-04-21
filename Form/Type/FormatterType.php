@@ -43,9 +43,7 @@ class FormatterType extends AbstractTypeExtension
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-
-
-
+        $this->configureOptions($resolver);
     }
 
     /**
