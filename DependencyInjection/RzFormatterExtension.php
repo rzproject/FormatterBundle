@@ -33,12 +33,40 @@ class RzFormatterExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('form_type.xml');
+        $loader->load('block.xml');
 
-        // merge RzFieldTypeBundle to RzAdminBundle
+        # Merge RzFieldTypeBundle to RzAdminBundle
         $container->setParameter('twig.form.resources',
                                  array_merge(
                                      $container->getParameter('twig.form.resources'),
                                      array('RzFormatterBundle:Form:formatter.html.twig')
                                  ));
+
+        $this->configureBlocks($config['blocks'], $container);
+    }
+
+    /**
+     * @param array                                                   $config
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     *
+     * @return void
+     */
+    public function configureBlocks($config, ContainerBuilder $container)
+    {
+        ####################################
+        # sonata.formatter.block.formatter
+        ####################################
+
+        # class
+        $container->setParameter('rz_formatter.block.service.formatter.class', $config['formatter']['class']);
+
+        # template
+        if($temp = $config['formatter']['templates']) {
+            $templates = array();
+            foreach ($temp as $template) {
+                $templates[$template['path']] = $template['name'];
+            }
+            $container->setParameter('rz_formatter.block.service.formatter.templates', $templates);
+        }
     }
 }
