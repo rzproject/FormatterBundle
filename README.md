@@ -5,6 +5,6 @@ Symfony2 Bundle - An extension of [SonataFormatterBundle](https://github.com/son
 
 Uses a forked version of SonataFormatterBundle
 
-**DEVELOPMENT VERSION**
+**STABLE VERSION**
 
 Back to: [rzpeoject](http://rzproject.github.io)
