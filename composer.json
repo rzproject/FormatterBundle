@@ -14,15 +14,15 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "rmzamora/formatter-bundle": "2.4.*",
-        "rz/block-bundle": "1.2.*"
+        "rmzamora/formatter-bundle": "2.4.2.*",
+        "rz/block-bundle": "1.2.2.*"
     },
     "autoload": {
         "psr-4": { "Rz\\FormatterBundle\\": "" }
     },
     "extra": {
         "branch-alias": {
-            "dev-1.1": "1.1.x-dev"
+            "dev-1.1": "1.1.2.x-dev"
         }
     }
 }
