@@ -59,7 +59,13 @@ class FormatterBlockService extends BaseFormatterBlockService
                                 'event_dispatcher' => $formBuilder->getEventDispatcher(),
                                 'format_field'     => array('format', '[format]'),
                                 'source_field'     => array('rawContent', '[rawContent]'),
-                                'target_field'     => '[content]'
+                                'target_field'     => '[content]',
+                                'ckeditor_context' => 'news',
+                                'source_field_options'      => array(
+                                    'error_bubbling'=>false,
+                                    'attr' => array('rows' => 20)
+                                ),
+                                'listener'       => true,
                             );
                         });
         $formMapper->add('settings', 'sonata_type_immutable_array', array(
