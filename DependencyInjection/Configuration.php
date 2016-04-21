@@ -1,19 +1,10 @@
 <?php
 
-/*
- * This file is part of the RzFormatterBundle package.
- *
- * (c) mell m. zamora <mell@rzproject.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Rz\FormatterBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -23,42 +14,31 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('rz_formatter');
-        $this->addBlockSettings($rootNode);
+        $node = $treeBuilder->root('rz_formatter');
+        $this->addAdminSection($node);
         return $treeBuilder;
     }
 
-    /**
-     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
-    private function addBlockSettings(ArrayNodeDefinition $node) {
+     private function addAdminSection(ArrayNodeDefinition $node) {
         $node
             ->children()
-                ->arrayNode('blocks')
-                ->addDefaultsIfNotSet()
+                ->arrayNode('admin_extenstion')
+                    ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('formatter')
+                        ->arrayNode('ckeditor')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('class')->cannotBeEmpty()->defaultValue('Rz\\FormatterBundle\\Block\\FormatterBlockService')->end()
-                                ->arrayNode('templates')
-                                    ->useAttributeAsKey('id')
-                                    ->prototype('array')
-                                        ->children()
-                                            ->scalarNode('name')->defaultValue('default')->end()
-                                            ->scalarNode('path')->defaultValue('RzFormatterBundle:Block:block_formatter.html.twig')->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
+                                ->scalarNode('class')->cannotBeEmpty()->defaultValue('Rz\\FormatterBundle\\Admin\\CkeditorAdminExtension')->end()
                             ->end()
                         ->end()
                     ->end()
                 ->end()
-            ->end();
+            ->end()
+        ;
     }
 }
