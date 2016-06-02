@@ -24,6 +24,12 @@
                 return;
             }
 
+            jQuery('#{{ form.children[format_field].vars.id }}').parents("form").on('click', function(event) {
+                if ({{ form.children[source_field].vars.id }}_rich_instance) {
+                    {{ form.children[source_field].vars.id }}_rich_instance.updateElement();
+                }
+            });
+
             jQuery('#{{ form.children[format_field].vars.id }}').change(function() {
                 var elms = jQuery('#{{ form.children[source_field].vars.id }}');
 
