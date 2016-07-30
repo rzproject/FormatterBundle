@@ -24,7 +24,8 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-     private function addAdminSection(ArrayNodeDefinition $node) {
+    private function addAdminSection(ArrayNodeDefinition $node)
+    {
         $node
             ->children()
                 ->arrayNode('admin_extenstion')

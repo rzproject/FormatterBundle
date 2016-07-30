@@ -98,7 +98,8 @@ class FormatterType extends AbstractTypeExtension
         ));
     }
 
-    protected function getChoices($pool, $translator) {
+    protected function getChoices($pool, $translator)
+    {
         $formatters = array();
         foreach ($pool->getFormatters() as $code => $instance) {
             $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
