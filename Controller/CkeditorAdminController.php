@@ -43,7 +43,7 @@ class CkeditorAdminController extends BaseCkeditorAdminController
             $provider = $filters['providerName']['value'];
         }
 
-        if($provider) {
+        if ($provider) {
             $datagrid->setValue('providerName', null, $provider);
         } else {
             $datagrid->setValue('providerName', null, $this->admin->getPersistentParameter('provider'));
